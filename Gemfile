@@ -12,6 +12,7 @@ gem 'slim-rails'
 gem 'jbuilder'
 gem 'faker'
 gem 'devise'
+gem 'will_paginate'
 gem 'pry', group: :development
 
 group :test do

@@ -1,0 +1,14 @@
+.panel class='panel-primary'
+  .panel-heading =article.title
+  .panel-body
+    h5 ="post by: #{article.user.nick}, #{article.created_at.to_formatted_s :long}"
+    text =article.text
+    br
+    .panel-footer
+      - if current_user == article.user
+        span = link_to 'Show', article
+        '
+        span = link_to 'Edit', edit_article_path(article)
+        '
+        span = link_to 'Destroy', article, data: {:confirm => 'Are you sure?'}, :method => :delete
+br

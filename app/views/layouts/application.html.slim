@@ -1,0 +1,31 @@
+doctype html
+html
+  head
+    title iGoods
+    meta name='viewport' content='width=device-width, initial-scale=1'
+    = stylesheet_link_tag    'application', media: 'all'
+    = csrf_meta_tags
+
+  body
+    .container
+      nav.navbar class='navbar-default'
+        .navbar-header
+          = link_to 'iGoods', '/', class: 'navbar-brand'
+        ul class='nav navbar-nav'
+          - if user_signed_in?
+            li = link_to 'New Article', new_article_path
+        ul class='nav navbar-nav navbar-right'
+          - if user_signed_in?
+            li = link_to user_articles_path do
+              span My Articles &nbsp;
+            li = link_to destroy_user_session_path, :method => :delete do
+              span class='glyphicon glyphicon-log-out'  Exit &nbsp;
+          - else
+            li = link_to new_user_registration_path do
+              span class='glyphicon glyphicon-user'  Register &nbsp;
+            li = link_to new_user_session_path do
+              span class='glyphicon glyphicon-log-in'  Login &nbsp;
+
+      ==yield
+    = javascript_include_tag 'application'
+

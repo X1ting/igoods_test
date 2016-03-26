@@ -13,6 +13,8 @@ gem 'jbuilder'
 gem 'faker'
 gem 'devise'
 gem 'will_paginate'
+gem 'acts-as-taggable-on', '~> 3.4'
+gem "select2-rails"
 gem 'pry', group: :development
 
 group :test do

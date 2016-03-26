@@ -13,6 +13,11 @@
     = f.label :text
     = f.text_area :text, class: 'form-control'
   .form-group
-    = f.label :not_publish!, class: 'display: inline'
+    = f.label :not_publish!, class: 'control-label'
     = f.check_box :not_publish, class: 'form-control'
+  .form-group
+    = f.label :tags
+    br
+    = f.collection_select :tag_list, @tags, :name, :name, {}, { multiple: true, "data-placeholder" => "Add tags here", class: 'form-control'}
+
   .actions = f.submit class: 'btn btn-success'

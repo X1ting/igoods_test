@@ -2,11 +2,17 @@ class ArticlesController < ApplicationController
   before_filter :authenticate_user!, only: [:create, :edit, :update, :destroy]
   before_action :set_article, only: [:show, :edit, :update, :destroy]
   before_action :check_rules, only: [:edit, :update, :destroy]
+  before_action :prepare_tags, only: [:edit, :new, :create, :index, :by_tag]
 
   # GET /articles
   # GET /articles.json
   def index
     @articles = Article.published.includes(:user).paginate(:page => params[:page]).order(created_at: :desc)
+  end
+
+  def by_tag
+    @articles = Article.tagged_with(params[:tag]).paginate(:page => params[:page]).order(created_at: :desc)
+    render action: :index
   end
 
   # GET /articles/1
@@ -79,6 +85,10 @@ class ArticlesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
-      params.require(:article).permit(:title, :text, :not_publish)
+      params.require(:article).permit(:title, :text, :not_publish, tag_list: [])
+    end
+
+    def prepare_tags
+      @tags = ActsAsTaggableOn::Tag.all
     end
 end

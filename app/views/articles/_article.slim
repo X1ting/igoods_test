@@ -7,12 +7,19 @@
     span Comments count:
     '
     text =article.comments.count
-    .panel-footer
-      span = link_to 'Show', article
 
-      - if current_user == article.user
-        '
-        span = link_to 'Edit', edit_article_path(article)
-        '
-        span = link_to 'Destroy', article, data: {:confirm => 'Are you sure?'}, :method => :delete
+    - if article.tags.count > 0
+      .panel-footer
+        -article.tags.each do |tag|
+          span.label class='label-primary' =tag.name
+          '
+
+    br
+    span = link_to 'Show', article
+
+    - if current_user == article.user
+      '
+      span = link_to 'Edit', edit_article_path(article)
+      '
+      span = link_to 'Destroy', article, data: {:confirm => 'Are you sure?'}, :method => :delete
 br

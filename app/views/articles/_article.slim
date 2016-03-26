@@ -4,9 +4,13 @@
     h5 ="post by: #{article.user.nick}, #{article.created_at.to_formatted_s :long}"
     text =article.text
     br
+    span Comments count:
+    '
+    text =article.comments.count
     .panel-footer
+      span = link_to 'Show', article
+
       - if current_user == article.user
-        span = link_to 'Show', article
         '
         span = link_to 'Edit', edit_article_path(article)
         '

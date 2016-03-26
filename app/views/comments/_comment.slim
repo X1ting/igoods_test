@@ -1,0 +1,13 @@
+.panel class='panel-default'
+  .panel-heading =comment.user.nick
+  .panel-body
+    h5 =comment.created_at.to_formatted_s :long
+    text =comment.body
+    - if comment.creator?(current_user)
+      - if comment.can_be_edited? || comment.can_be_destroyed?
+        .panel-footer
+          - if comment.can_be_edited?
+            span = link_to 'Edit', edit_article_comment_path(comment.article, comment)
+            '
+          - if comment.can_be_destroyed?
+            span = link_to 'Destroy', article_comment_path(comment.article, comment), data: {:confirm => 'Are you sure?'}, :method => :delete

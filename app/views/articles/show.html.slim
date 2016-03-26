@@ -1,11 +1,21 @@
 br
-.panel class='panel-default'
+.panel class='panel-primary'
   .panel-heading
     =@article.title
   .panel-body
     =@article.text
       =event.start
 
-= link_to 'Edit', edit_article_path(@article)
-'|
+h3 Comments:
+.panel-group
+  == render @comments
+hr
+- if current_user
+  = render 'comments/form', url: article_comments_path(@article)
+  -if current_user.id = @article.user_id
+    = link_to 'Edit', edit_article_path(@article)
+    '
+    '|
+- else
+  p You must be authorized for write comments
 = link_to 'Back', articles_path

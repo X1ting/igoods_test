@@ -6,13 +6,13 @@
         - @article.errors.full_messages.each do |message|
           li = message
 
-  .field
+  .form-group
     = f.label :title
-    = f.text_field :title
-  .field
+    = f.text_field :title, class: 'form-control'
+  .form-group
     = f.label :text
-    = f.text_area :text
-  .field
-    = f.label :published
-    = f.check_box :published
-  .actions = f.submit
+    = f.text_area :text, class: 'form-control'
+  .form-group
+    = f.label :not_publish!, class: 'display: inline'
+    = f.check_box :not_publish, class: 'form-control'
+  .actions = f.submit class: 'btn btn-success'

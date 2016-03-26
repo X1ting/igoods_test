@@ -16,6 +16,8 @@ html
             li = link_to 'New Article', new_article_path
         ul class='nav navbar-nav navbar-right'
           - if user_signed_in?
+            li = link_to user_comments_path do
+              span My Comments &nbsp;
             li = link_to user_articles_path do
               span My Articles &nbsp;
             li = link_to destroy_user_session_path, :method => :delete do
